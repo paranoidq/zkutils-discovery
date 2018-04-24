@@ -25,6 +25,9 @@ public class SampleClient {
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
 //        ServiceQuery query = context.getBean(ServiceQuery.class);
         ServiceQuery query = new ServiceQuery(connectString, basePath);
+        query.init();
+        query.start();
+
         ServiceInstance<ServicePayLoad> serviceInstance = null;
 
         for (int i = 0; i < 1000; i++) {
