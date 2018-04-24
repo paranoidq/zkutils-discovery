@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>me.zkutils</groupId>
+    <artifactId>zkutils-discovery</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+
+
+    <dependencies>
+        <!-- Zookeeper官方jar包 -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>slf4j-log4j12</artifactId>
+                    <groupId>org.slf4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- Curator程序 -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <!-- Curator场景工具 -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+        <!-- Curator testing -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-test</artifactId>
+            <version>4.0.1</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Curator service discovery -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-x-discovery</artifactId>
+            <version>4.0.1</version>
+        </dependency>
+
+
+        <!--spring-->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.12.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+            <version>4.3.12.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
+
+
+        <!--log4j2-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-slf4j-impl</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+
+    </dependencies>
+
+
+    <build>
+        <!-- 编译输出目录, 默认值不建议修改 -->
+        <directory>${basedir}/target</directory>
+        <!-- 构建项目名称, 默认值 ${project.artifactId}-${project.version} -->
+        <finalName>zkutils-discovery</finalName>
+        <!-- 源码目录 -->
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <!-- 测试源码目录 -->
+        <testSourceDirectory>/src/test/java</testSourceDirectory>
+        <!-- 源码输出目录 -->
+        <outputDirectory>target/classes</outputDirectory>
+        <!-- 测试源码输出目录 -->
+        <testOutputDirectory>target/test-classes</testOutputDirectory>
+
+        <!-- 单独过滤文件 -->
+        <filters>
+
+        </filters>
+
+
+        <!-- 项目资源路径列表-->
+        <resources>
+            <resource>
+                <!-- 描述存放资源的目录，该路径相对POM路径。默认值${basedir}/src/main/resources -->
+                <directory>${basedir}/src/main/resources</directory>
+                <filtering>true</filtering>
+
+                <!-- 打包时不被包含的文件和目录 -->
+                <excludes>
+                    <exclude>excludes/**.*</exclude>
+
+                    <!-- 资源根目录排除各环境的配置，使用单独的资源目录来指定 -->
+                    <exclude>config/dev/*</exclude>
+                    <exclude>config/prod/*</exclude>
+                    <exclude>config/test/*</exclude>
+                </excludes>
+
+                <!-- 指定build后的resource存放的文件夹。该路径默认是basedir/target/classes。通常被打包在JAR中的resources的目标路径为META-INF -->
+                <targetPath>${basedir}/target/classes</targetPath>
+            </resource>
+
+            <!-- 根据profiles激活的目录单独采用配置 -->
+            <resource>
+                <directory>${basedir}/src/main/resources/config/${profiles.active}</directory>
+                <targetPath>${basedir}/target/classes/config</targetPath>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- maven插件依赖 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>2.10</version>
+            </plugin>
+
+
+            <!-- maven编译插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- war包打包插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <!-- 如果目录结构不符合maven约定, 需要指定web.xml位置和warSourceDirectory -->
+                    <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                    <warSourceDirectory>${basedir}/src/main/webapp</warSourceDirectory>
+
+                    <!-- 配置web相关资源, 如jsp, img, js, css等 -->
+                    <webResources>
+                        <!-- 指定资源的build目录，默认build到${basedir}目录下-->
+                        <resource>
+                            <directory>${basedir}/src/main/webapp/resources/bootstrap</directory>
+                            <targetPath>resources/bootstrap</targetPath>
+                        </resource>
+
+                        <!-- 其他目录同样的方式配置，如默认则无需配置-->
+                        <!--<resource></resource>-->
+                    </webResources>
+
+                    <!-- webapp目录下编译时忽略的文件(夹) -->
+                    <warSourceExcludes>WEB-INF/excludes/**,</warSourceExcludes>
+                    <!-- webapp目录下打包时忽略的文件(夹) -->
+                    <packagingExcludes>WEB-INF/excludes/**,</packagingExcludes>
+                </configuration>
+            </plugin>
+
+        </plugins>
+
+    </build>
+
+</project>

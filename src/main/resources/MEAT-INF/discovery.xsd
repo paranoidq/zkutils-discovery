@@ -1,0 +1,48 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<xsd:schema xmlns="http://me.zkutils.loadbalance/schema/loadbalance"-->
+            <!--xmlns:xsd="http://www.w3.org/2001/XMLSchema"-->
+            <!--xmlns:beans="http://www.springframework.org/schema/beans"-->
+            <!--targetNamespace="http://me.zkutils.loadbalance/schema/loadbalance"-->
+            <!--elementFormDefault="qualified"-->
+            <!--attributeFormDefault="unqualified">-->
+
+    <!--<xsd:import namespace="http://www.springframework.org/schema/beans"/>-->
+
+    <!--<xsd:complexType name="service">-->
+        <!--<xsd:complexContent>-->
+            <!--<xsd:extension base="beans:identifiedType">-->
+                <!--<xsd:attribute name="name" type="xsd:string" use="required">-->
+                    <!--<xsd:annotation>-->
+                        <!--<xsd:documentation>-->
+                            <!--<![CDATA[ The name of hacker ]]>-->
+                        <!--</xsd:documentation>-->
+                    <!--</xsd:annotation>-->
+                <!--</xsd:attribute>-->
+                <!--<xsd:attribute name="age" type="xsd:int" use="optional" default="0">-->
+                    <!--<xsd:annotation>-->
+                        <!--<xsd:documentation><![CDATA[ The age of hacker. ]]></xsd:documentation>-->
+                    <!--</xsd:annotation>-->
+                <!--</xsd:attribute>-->
+
+                <!--<xsd:attribute name="language" type="xsd:string" use="optional">-->
+                    <!--<xsd:annotation>-->
+                        <!--<xsd:documentation><![CDATA[ The language of hacker. ]]></xsd:documentation>-->
+                    <!--</xsd:annotation>-->
+                <!--</xsd:attribute>-->
+
+                <!--<xsd:attribute name="isHide" type="xsd:boolean" use="optional">-->
+                    <!--<xsd:annotation>-->
+                        <!--<xsd:documentation><![CDATA[ The status of hacker. ]]></xsd:documentation>-->
+                    <!--</xsd:annotation>-->
+                <!--</xsd:attribute>-->
+            <!--</xsd:extension>-->
+        <!--</xsd:complexContent>-->
+    <!--</xsd:complexType>-->
+
+
+    <!--<xsd:element name="hacker" type="hackType">-->
+        <!--<xsd:annotation>-->
+            <!--<xsd:documentation><![CDATA[ The hacker config ]]></xsd:documentation>-->
+        <!--</xsd:annotation>-->
+    <!--</xsd:element>-->
+<!--</xsd:schema>-->

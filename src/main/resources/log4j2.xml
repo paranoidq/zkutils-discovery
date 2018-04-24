@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+
+    <!-- 变量配置 -->
+    <Properties>
+        <Property name="baseLogPath">logs/</Property>
+        <Property name="dailyLogFileName">daily</Property>
+    </Properties>
+
+
+
+    <!-- appender配置 -->
+    <Appenders>
+        <Console name="APPENDER_CONSOLE" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <RollingFile name="APPENDER_DAILY_ROLLING" fileName="${baseLogPath}/${dailyLogFileName}.log" filePattern="${baseLogPath}/${dailyLogFileName}-%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+            <TimeBasedTriggeringPolicy interval="1"/>
+        </RollingFile>
+
+        <File name="APPENDER_FILE" fileName="zkutils-lb.log" bufferedIO="false">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </File>
+    </Appenders>
+
+
+    <Loggers>
+        <Logger name="me.zkutils.loadbalance" level="debug" additivity="false">
+            <AppenderRef ref="APPENDER_CONSOLE" />
+　　　　 </Logger>
+        <Logger name="org.springframework" level="error" additivity="false">
+            <AppenderRef ref="APPENDER_CONSOLE" />
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="APPENDER_CONSOLE" />
+        </Root>
+    </Loggers>
+</Configuration>

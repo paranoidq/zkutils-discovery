@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Spring主配置文件 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.0.xsd
+">
+
+    <!-- 配置自动扫描，并默认开启基于注解的bean注入 -->
+    <context:component-scan base-package="me.zkutils.loadbalance"></context:component-scan>
+
+
+    <!--
+        applicationContext-all.xml负责整合所有的配置文件片段，
+        配置文件片段中无需import，直接使用其他配置文件中的bean
+    -->
+    <!--<import resource="classpath:config/applicationContext-db.xml"/>-->
+    <!--<import resource="classpath:config/applicationContext-tx.xml"/>-->
+
+
+    <!-- 定义ServiceRegistry为bean -->
+    <bean class="me.zkutils.loadbalance.server.registry.ServiceRegistry" lazy-init="true">
+        <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
+        <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
+    </bean>
+
+    <bean class="me.zkutils.loadbalance.client.discovery.ServiceQuery" lazy-init="true">
+        <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
+        <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
+    </bean>
+</beans>
