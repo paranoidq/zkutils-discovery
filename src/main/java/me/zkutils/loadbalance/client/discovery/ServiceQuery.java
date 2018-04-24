@@ -36,17 +36,17 @@ public class ServiceQuery implements FactoryBean<ServiceDiscovery>, Initializing
     private String connectString;
     private String basePath;
 
-    // set注入
+    // set娉ㄥ叆
     public void setConnectString(String connectString) {
         this.connectString = connectString;
     }
 
-    // set注入
+    // set娉ㄥ叆
     public void setBasePath(String basePath) {
         this.basePath = basePath;
     }
 
-    // constructor注入
+    // constructor娉ㄥ叆
     public ServiceQuery(String connectString, String basePath) {
         this.connectString = connectString;
         this.basePath = basePath;
@@ -78,7 +78,7 @@ public class ServiceQuery implements FactoryBean<ServiceDiscovery>, Initializing
 
     public void init() throws Exception {
         client = CuratorFrameworkFactory.newClient(connectString, 2000, 2000, new ExponentialBackoffRetry(1000, 3));
-        // 构造ServiceDiscovery实例
+        // 鏋勯�燬erviceDiscovery瀹炰緥
         serviceDiscovery = ServiceDiscoveryBuilder.builder(ServicePayLoad.class)
             .basePath(basePath)
             .client(client)

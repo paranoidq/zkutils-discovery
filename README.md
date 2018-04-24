@@ -1,11 +1,11 @@
-# Zookeeper´î½¨·þÎñ×¢²áÓë·¢ÏÖ¿ò¼Ü
+# Zookeeperæ­å»ºæœåŠ¡æ³¨å†Œä¸Žå‘çŽ°æ¡†æž¶
 
-## ·þÎñ·¢ÏÖ
-- »ùÓÚÕý³£API·½Ê½µ÷ÓÃ
-- »ùÓÚSpring Bean·½Ê½×¢Èë
-- »ùÓÚ¶¯Ì¬Á÷Á¿µÄ¾ùºâloadbalance²ßÂÔ £¨TODO£©
+## æœåŠ¡å‘çŽ°
+- åŸºäºŽæ­£å¸¸APIæ–¹å¼è°ƒç”¨
+- åŸºäºŽSpring Beanæ–¹å¼æ³¨å…¥
+- åŸºäºŽåŠ¨æ€æµé‡çš„å‡è¡¡loadbalanceç­–ç•¥ ï¼ˆTODOï¼‰
 
 
-## ·þÎñ×¢²á
-- »ùÓÚÕý³£API·½Ê½µ÷ÓÃ
-- »ùÓÚSpring Bean·½Ê½×¢Èë
+## æœåŠ¡æ³¨å†Œ
+- åŸºäºŽæ­£å¸¸APIæ–¹å¼è°ƒç”¨
+- åŸºäºŽSpring Beanæ–¹å¼æ³¨å…¥

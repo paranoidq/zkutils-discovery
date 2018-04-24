@@ -24,15 +24,15 @@ public class SampleClient {
 
         for (int i = 0; i < 1000; i++) {
             serviceInstance = query.getServiceInstance("demo-service");
-            logger.info("[" + i + "]»ñÈ¡Service£º" + serviceInstance.toString());
+            logger.info("[" + i + "]èŽ·å–Serviceï¼š" + serviceInstance.toString());
             TimeUnit.SECONDS.sleep(5);
         }
 
         /*
             output:
 
-            14:44:15.636 [main] INFO  me.zkutils.loadbalance.client.sample.SampleClient - µÚÒ»´Î»ñÈ¡service: ServiceInstance{name='demo-service', id='host1', address='localhost', port=8080, sslPort=null, payload=null, registrationTimeUTC=1524551786299, serviceType=DYNAMIC, uriSpec=null, enabled=true}
-            14:44:15.638 [main] INFO  me.zkutils.loadbalance.client.sample.SampleClient - µÚ¶þ´Î»ñÈ¡service£ºServiceInstance{name='demo-service', id='host2', address='localhost', port=8089, sslPort=null, payload=null, registrationTimeUTC=1524551786542, serviceType=DYNAMIC, uriSpec=null, enabled=true}
+            14:44:15.636 [main] INFO  me.zkutils.loadbalance.client.sample.SampleClient - ç¬¬ä¸€æ¬¡èŽ·å–service: ServiceInstance{name='demo-service', id='host1', address='localhost', port=8080, sslPort=null, payload=null, registrationTimeUTC=1524551786299, serviceType=DYNAMIC, uriSpec=null, enabled=true}
+            14:44:15.638 [main] INFO  me.zkutils.loadbalance.client.sample.SampleClient - ç¬¬äºŒæ¬¡èŽ·å–serviceï¼šServiceInstance{name='demo-service', id='host2', address='localhost', port=8089, sslPort=null, payload=null, registrationTimeUTC=1524551786542, serviceType=DYNAMIC, uriSpec=null, enabled=true}
          */
 
 

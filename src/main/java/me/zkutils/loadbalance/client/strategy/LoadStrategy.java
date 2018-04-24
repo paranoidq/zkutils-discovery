@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * 实现根据流量动态均衡的策略
+ * 瀹炵幇鏍规嵁娴侀噺鍔ㄦ�佸潎琛＄殑绛栫暐
  * @author paranoidq
  * @since 1.0.0
  */
