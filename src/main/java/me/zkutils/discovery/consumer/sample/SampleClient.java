@@ -1,7 +1,7 @@
-package me.zkutils.loadbalance.consumer.sample;
+package me.zkutils.discovery.consumer.sample;
 
-import me.zkutils.loadbalance.ServicePayLoad;
-import me.zkutils.loadbalance.consumer.discovery.ServiceQuery;
+import me.zkutils.discovery.ServicePayLoad;
+import me.zkutils.discovery.consumer.discovery.ServiceQuery;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.strategies.RandomStrategy;
 import org.slf4j.Logger;

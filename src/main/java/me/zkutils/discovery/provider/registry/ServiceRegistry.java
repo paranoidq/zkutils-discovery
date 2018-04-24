@@ -1,7 +1,7 @@
-package me.zkutils.loadbalance.provider.registry;
+package me.zkutils.discovery.provider.registry;
 
-import me.zkutils.loadbalance.ServicePayLoad;
-import me.zkutils.loadbalance.consumer.utils.Defaults;
+import me.zkutils.discovery.ServicePayLoad;
+import me.zkutils.discovery.consumer.utils.Defaults;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -12,9 +12,6 @@ import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.details.JsonInstanceSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
 
 import java.util.Collection;
 

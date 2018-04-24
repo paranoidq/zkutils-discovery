@@ -27,7 +27,7 @@
 
 
     <Loggers>
-        <Logger name="me.zkutils.loadbalance" level="debug" additivity="false">
+        <Logger name="me.zkutils.discovery" level="debug" additivity="false">
             <AppenderRef ref="APPENDER_CONSOLE" />
 　　　　 </Logger>
         <Logger name="org.springframework" level="error" additivity="false">

@@ -1,7 +1,7 @@
-package me.zkutils.loadbalance.recipes.dns;
+package me.zkutils.discovery.recipes.dns;
 
-import me.zkutils.loadbalance.ServicePayLoad;
-import me.zkutils.loadbalance.provider.registry.ServiceRegistry;
+import me.zkutils.discovery.ServicePayLoad;
+import me.zkutils.discovery.provider.registry.ServiceRegistry;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -5,4 +5,4 @@
  * @author paranoidq
  * @since 1.0.0
  */
-package me.zkutils.loadbalance.recipes.dns;
+package me.zkutils.discovery.recipes.dns;

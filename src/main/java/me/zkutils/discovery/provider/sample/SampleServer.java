@@ -1,11 +1,10 @@
-package me.zkutils.loadbalance.provider.sample;
+package me.zkutils.discovery.provider.sample;
 
-import me.zkutils.loadbalance.ServicePayLoad;
-import me.zkutils.loadbalance.provider.registry.ServiceRegistry;
+import me.zkutils.discovery.ServicePayLoad;
+import me.zkutils.discovery.provider.registry.ServiceRegistry;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 

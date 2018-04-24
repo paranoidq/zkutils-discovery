@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.recipes.dns;
+package me.zkutils.discovery.recipes.dns;
 
 /**
  * @author paranoidq

@@ -1,8 +1,8 @@
-package me.zkutils.loadbalance.consumer.discovery;
+package me.zkutils.discovery.consumer.discovery;
 
 
-import me.zkutils.loadbalance.ServicePayLoad;
-import me.zkutils.loadbalance.consumer.utils.Defaults;
+import me.zkutils.discovery.ServicePayLoad;
+import me.zkutils.discovery.consumer.utils.Defaults;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.state.ConnectionState;

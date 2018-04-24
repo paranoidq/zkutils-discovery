@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.provider.utils;
+package me.zkutils.discovery.provider.utils;
 
 /**
  * @author paranoidq
