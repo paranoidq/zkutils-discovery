@@ -15,6 +15,8 @@ import org.apache.curator.x.discovery.strategies.RandomStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -37,6 +39,10 @@ public class ServiceQuery {
     private int maxConnectRetries = Defaults.MAX_CONNECT_RETRIES;
 
     private volatile boolean initialized = false;
+
+
+    public ServiceQuery() {
+    }
 
     /**
      * 构造函数
@@ -156,4 +162,21 @@ public class ServiceQuery {
     public void setMaxConnectRetries(int maxConnectRetries) {
         this.maxConnectRetries = maxConnectRetries;
     }
+
+
+    @PreDestroy
+    public void destroy() {
+        CloseableUtils.closeQuietly(client);
+        CloseableUtils.closeQuietly(serviceDiscovery);
+        for (ServiceProvider provider : cache.values()) {
+            CloseableUtils.closeQuietly(provider);
+        }
+    }
+
+    @PostConstruct
+    public void afterPropertiesSet() throws Exception {
+        this.init();
+        this.start();
+    }
+
 }

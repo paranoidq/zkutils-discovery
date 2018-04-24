@@ -2,10 +2,12 @@ package me.zkutils.discovery.consumer.sample;
 
 import me.zkutils.discovery.ServicePayLoad;
 import me.zkutils.discovery.consumer.discovery.ServiceQuery;
+import me.zkutils.discovery.provider.registry.ServiceRegistry;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.strategies.RandomStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -22,11 +24,10 @@ public class SampleClient {
 
 
     public static void main(String[] args) throws Exception {
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
-//        ServiceQuery query = context.getBean(ServiceQuery.class);
-        ServiceQuery query = new ServiceQuery(connectString, basePath);
-        query.setProviderStrategy(new RandomStrategy<>());
-        query.start();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+        ServiceQuery query = context.getBean("query", ServiceQuery.class);
+//        ServiceQuery query = new ServiceQuery(connectString, basePath);
+//        query.setProviderStrategy(new RandomStrategy<>());
 
         ServiceInstance<ServicePayLoad> serviceInstance = null;
 

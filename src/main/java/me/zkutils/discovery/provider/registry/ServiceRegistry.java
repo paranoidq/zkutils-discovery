@@ -12,7 +12,11 @@ import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.details.JsonInstanceSerializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Collection;
 
 /**
@@ -34,6 +38,8 @@ public class ServiceRegistry {
 
     private volatile boolean initialized = false;
 
+    public ServiceRegistry() {
+    }
 
     public ServiceRegistry(String connectString, String basePath) {
         this.connectString = connectString;
@@ -115,36 +121,26 @@ public class ServiceRegistry {
     //  For spring ioc
     //
 
-//    public void destroy() throws Exception {
-//        this.stop();
-//    }
-//
-//    public ServiceDiscovery getObject() throws Exception {
-//        return this.serviceDiscovery;
-//    }
-//
-//    public Class<?> getObjectType() {
-//        return ServiceDiscovery.class;
-//    }
-//
-//    public boolean isSingleton() {
-//        return true;
-//    }
-//
-//    public void afterPropertiesSet() throws Exception {
-//        this.init();
-//        this.start();
-//    }
-//
-//
-//    public static void main(String[] args) throws Exception {
-//
-//        // no use, just to demonstrate usage for non-spring cases
-//        String connectString = "";
-//        String basePath = "";
-//        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
-//        registry.init();
-//        registry.start();
-//        registry.registerService(null);
-//    }
+    @PreDestroy
+    public void destroy() throws Exception {
+        this.stop();
+    }
+
+    @PostConstruct
+    public void afterPropertiesSet() throws Exception {
+        this.init();
+        this.start();
+    }
+
+
+    public static void main(String[] args) throws Exception {
+
+        // no use, just to demonstrate usage for non-spring cases
+        String connectString = "";
+        String basePath = "";
+        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
+        registry.init();
+        registry.start();
+        registry.registerService(null);
+    }
 }

@@ -5,6 +5,7 @@ import me.zkutils.discovery.provider.registry.ServiceRegistry;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -21,11 +22,8 @@ public class SampleServer {
 
 
     public static void main(String[] args) throws Exception {
-//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
-//        ServiceRegistry registry = context.getBean(ServiceRegistry.class);
-
-        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
-        registry.start();
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+        ServiceRegistry registry = context.getBean(ServiceRegistry.class);
 
         registry.registerService(ServiceInstance.<ServicePayLoad>builder()
             .name("demo-service")
@@ -43,7 +41,7 @@ public class SampleServer {
 
         ServiceInstance<ServicePayLoad> serviceInstance = registry.queryForInstance("demo-service", "host1");
 
-        TimeUnit.SECONDS.sleep(2);
+        TimeUnit.SECONDS.sleep(5);
         logger.info(serviceInstance.toString());
 
         TimeUnit.SECONDS.sleep(8);
