@@ -6,6 +6,7 @@ import org.apache.curator.x.discovery.ServiceInstance;
 import org.apache.curator.x.discovery.strategies.RoundRobinStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -46,11 +47,19 @@ public final class DnsQuery {
         this.query = query;
     }
 
+
     public static void main(String[] args) throws Exception {
-        ServiceQuery serviceQuery = new ServiceQuery("localhost", "dns");
-        serviceQuery.setProviderStrategy(new RoundRobinStrategy<>());
-        serviceQuery.start();
-        DnsQuery dnsQuery = new DnsQuery(serviceQuery);
+
+
+//
+//        ServiceQuery serviceQuery = new ServiceQuery("localhost", "dns");
+//        serviceQuery.setProviderStrategy(new RoundRobinStrategy<>());
+//        serviceQuery.start();
+//        DnsQuery dnsQuery = new DnsQuery(serviceQuery);
+
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+        DnsQuery dnsQuery = context.getBean(DnsQuery.class);
         for (int i = 0; i < 10000; i++) {
             DnsEntry dnsEntry = dnsQuery.resolver("test.com.up");
             System.out.println("解析DNS: " + dnsEntry.toString());

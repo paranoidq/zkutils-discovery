@@ -5,6 +5,7 @@ import me.zkutils.discovery.provider.registry.ServiceRegistry;
 import org.apache.curator.x.discovery.ServiceInstance;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -41,11 +42,17 @@ public class DnsRegistry {
 
 
     public static void main(String[] args) throws Exception {
-        ServiceRegistry serviceRegistry = new ServiceRegistry("localhost", "/dns");
-        serviceRegistry.start();
-        DnsRegistry dns = new DnsRegistry(serviceRegistry);
-        dns.registerDns("test.com.up", new DnsEntry("localhost", 1001));
-        dns.registerDns("test.com.up", new DnsEntry("localhost", 1002));
+
+//
+//        ServiceRegistry serviceRegistry = new ServiceRegistry("localhost", "/dns");
+//        serviceRegistry.start();
+//        DnsRegistry dns = new DnsRegistry(serviceRegistry);
+
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+        DnsRegistry dnsRegistry = context.getBean(DnsRegistry.class);
+
+        dnsRegistry.registerDns("test.com.up", new DnsEntry("localhost", 1001));
+        dnsRegistry.registerDns("test.com.up", new DnsEntry("localhost", 1002));
 
         TimeUnit.SECONDS.sleep(Integer.MAX_VALUE);
 
