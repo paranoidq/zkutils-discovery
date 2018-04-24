@@ -3,9 +3,9 @@ package me.zkutils.loadbalance.consumer.sample;
 import me.zkutils.loadbalance.ServicePayLoad;
 import me.zkutils.loadbalance.consumer.discovery.ServiceQuery;
 import org.apache.curator.x.discovery.ServiceInstance;
+import org.apache.curator.x.discovery.strategies.RandomStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,13 +25,13 @@ public class SampleClient {
 //        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
 //        ServiceQuery query = context.getBean(ServiceQuery.class);
         ServiceQuery query = new ServiceQuery(connectString, basePath);
-        query.init();
+        query.setProviderStrategy(new RandomStrategy<>());
         query.start();
 
         ServiceInstance<ServicePayLoad> serviceInstance = null;
 
         for (int i = 0; i < 1000; i++) {
-            serviceInstance = query.getServiceInstance("demo-service");
+            serviceInstance = query.getService("demo-service");
             logger.info("[" + i + "]获取Service：" + serviceInstance.toString());
             TimeUnit.SECONDS.sleep(5);
         }
@@ -43,6 +43,7 @@ public class SampleClient {
             14:44:15.638 [main] INFO  me.zkutils.loadbalance.client.sample.SampleClient - 第二次获取service：ServiceInstance{name='demo-service', id='host2', address='localhost', port=8089, sslPort=null, payload=null, registrationTimeUTC=1524551786542, serviceType=DYNAMIC, uriSpec=null, enabled=true}
          */
 
+        query.stop();
 
         Thread.sleep(Integer.MAX_VALUE);
     }

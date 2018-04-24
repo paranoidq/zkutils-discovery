@@ -26,7 +26,6 @@ public class SampleServer {
 //        ServiceRegistry registry = context.getBean(ServiceRegistry.class);
 
         ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
-        registry.init();
         registry.start();
 
         registry.registerService(ServiceInstance.<ServicePayLoad>builder()

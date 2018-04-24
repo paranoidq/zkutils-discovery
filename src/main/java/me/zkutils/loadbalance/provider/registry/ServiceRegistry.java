@@ -1,6 +1,7 @@
 package me.zkutils.loadbalance.provider.registry;
 
 import me.zkutils.loadbalance.ServicePayLoad;
+import me.zkutils.loadbalance.consumer.utils.Defaults;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -25,33 +26,27 @@ public class ServiceRegistry {
 
     private Logger logger = LoggerFactory.getLogger(ServiceRegistry.class);
 
+    private CuratorFramework client;
     private ServiceDiscovery<ServicePayLoad> serviceDiscovery;
 
-
-    private CuratorFramework client;
     private String basePath;
     private String connectString;
+    private int connectTimeout = Defaults.CONNECT_TIMEOUT_MS;
+    private int sessionTimeout = Defaults.SESSION_TIMEOUT_MS;
+    private int maxConnectRetries = Defaults.MAX_CONNECT_RETRIES;
+
+    private volatile boolean initialized = false;
 
 
-    public void setBasePath(String basePath) {
-        this.basePath = basePath;
-    }
-
-    public void setConnectString(String connectString) {
+    public ServiceRegistry(String connectString, String basePath) {
         this.connectString = connectString;
-    }
-
-    // constructor注入
-    public ServiceRegistry(String basePath, String connectString) {
         this.basePath = basePath;
-        this.connectString = connectString;
     }
 
 
     public void registerService(ServiceInstance<ServicePayLoad> instance) throws Exception {
         serviceDiscovery.registerService(instance);
     }
-
 
     public void updateService(ServiceInstance<ServicePayLoad> instance) throws Exception {
         serviceDiscovery.updateService(instance);
@@ -70,8 +65,17 @@ public class ServiceRegistry {
     }
 
     public void start() throws Exception {
-        client.start();
-        serviceDiscovery.start();
+        if (!initialized) {
+            synchronized (ServiceRegistry.class) {
+                if (!initialized) {
+                    init();
+                    initialized = true;
+                    client.start();
+                    serviceDiscovery.start();
+                }
+            }
+        }
+
     }
 
     public void stop() {
@@ -79,8 +83,8 @@ public class ServiceRegistry {
         CloseableUtils.closeQuietly(client);
     }
 
-    public void init() throws Exception {
-        client = CuratorFrameworkFactory.newClient(connectString, 2000, 2000, new ExponentialBackoffRetry(1000, 3));
+    private synchronized void init() throws Exception {
+        client = CuratorFrameworkFactory.newClient(connectString, connectTimeout, sessionTimeout, new ExponentialBackoffRetry(1000, maxConnectRetries));
 
         // 构造ServiceDiscovery实例
         serviceDiscovery = ServiceDiscoveryBuilder.builder(ServicePayLoad.class)
@@ -90,7 +94,25 @@ public class ServiceRegistry {
             .build();
     }
 
+    public void setBasePath(String basePath) {
+        this.basePath = basePath;
+    }
 
+    public void setConnectString(String connectString) {
+        this.connectString = connectString;
+    }
+
+    public void setConnectTimeout(int connectTimeout) {
+        this.connectTimeout = connectTimeout;
+    }
+
+    public void setSessionTimeout(int sessionTimeout) {
+        this.sessionTimeout = sessionTimeout;
+    }
+
+    public void setMaxConnectRetries(int maxConnectRetries) {
+        this.maxConnectRetries = maxConnectRetries;
+    }
 
     //
     //  For spring ioc
