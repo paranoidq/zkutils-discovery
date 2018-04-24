@@ -17,9 +17,14 @@ public class SampleClient {
 
     private static Logger logger = LoggerFactory.getLogger(SampleClient.class);
 
+    private static String connectString = "localhost";
+    private static String basePath = "loadbalance";
+
+
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
-        ServiceQuery query = context.getBean(ServiceQuery.class);
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+//        ServiceQuery query = context.getBean(ServiceQuery.class);
+        ServiceQuery query = new ServiceQuery(connectString, basePath);
         ServiceInstance<ServicePayLoad> serviceInstance = null;
 
         for (int i = 0; i < 1000; i++) {

@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author paranoidq
  * @since 1.0.0
  */
-public class ServiceQuery implements FactoryBean<ServiceDiscovery>, InitializingBean, DisposableBean {
+public class ServiceQuery {
 
     private ConcurrentHashMap<String, ServiceProvider<ServicePayLoad>> cache = new ConcurrentHashMap<String, ServiceProvider<ServicePayLoad>>();
 
@@ -36,17 +36,14 @@ public class ServiceQuery implements FactoryBean<ServiceDiscovery>, Initializing
     private String connectString;
     private String basePath;
 
-    // set注入
     public void setConnectString(String connectString) {
         this.connectString = connectString;
     }
 
-    // set注入
     public void setBasePath(String basePath) {
         this.basePath = basePath;
     }
 
-    // constructor注入
     public ServiceQuery(String connectString, String basePath) {
         this.connectString = connectString;
         this.basePath = basePath;
@@ -100,25 +97,25 @@ public class ServiceQuery implements FactoryBean<ServiceDiscovery>, Initializing
     //  for spring ioc
     //
 
-    public void destroy() throws Exception {
-        stop();
-    }
-
-    public ServiceDiscovery getObject() throws Exception {
-        return this.serviceDiscovery;
-    }
-
-    public Class<?> getObjectType() {
-        return ServiceDiscovery.class;
-    }
-
-    public boolean isSingleton() {
-        return true;
-    }
-
-    public void afterPropertiesSet() throws Exception {
-        init();
-        start();
-    }
+//    public void destroy() throws Exception {
+//        stop();
+//    }
+//
+//    public ServiceDiscovery getObject() throws Exception {
+//        return this.serviceDiscovery;
+//    }
+//
+//    public Class<?> getObjectType() {
+//        return ServiceDiscovery.class;
+//    }
+//
+//    public boolean isSingleton() {
+//        return true;
+//    }
+//
+//    public void afterPropertiesSet() throws Exception {
+//        init();
+//        start();
+//    }
 
 }

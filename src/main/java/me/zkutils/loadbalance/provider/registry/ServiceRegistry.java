@@ -21,7 +21,7 @@ import java.util.Collection;
  * @author paranoidq
  * @since 1.0.0
  */
-public class ServiceRegistry implements FactoryBean<ServiceDiscovery>, InitializingBean, DisposableBean {
+public class ServiceRegistry {
 
     private Logger logger = LoggerFactory.getLogger(ServiceRegistry.class);
 
@@ -33,18 +33,12 @@ public class ServiceRegistry implements FactoryBean<ServiceDiscovery>, Initializ
     private String connectString;
 
 
-    // set注入
     public void setBasePath(String basePath) {
         this.basePath = basePath;
     }
 
-    // set注入
     public void setConnectString(String connectString) {
         this.connectString = connectString;
-    }
-
-    public ServiceRegistry() {
-
     }
 
     // constructor注入
@@ -102,36 +96,36 @@ public class ServiceRegistry implements FactoryBean<ServiceDiscovery>, Initializ
     //  For spring ioc
     //
 
-    public void destroy() throws Exception {
-        this.stop();
-    }
-
-    public ServiceDiscovery getObject() throws Exception {
-        return this.serviceDiscovery;
-    }
-
-    public Class<?> getObjectType() {
-        return ServiceDiscovery.class;
-    }
-
-    public boolean isSingleton() {
-        return true;
-    }
-
-    public void afterPropertiesSet() throws Exception {
-        this.init();
-        this.start();
-    }
-
-
-    public static void main(String[] args) throws Exception {
-
-        // no use, just to demonstrate usage for non-spring cases
-        String connectString = "";
-        String basePath = "";
-        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
-        registry.init();
-        registry.start();
-        registry.registerService(null);
-    }
+//    public void destroy() throws Exception {
+//        this.stop();
+//    }
+//
+//    public ServiceDiscovery getObject() throws Exception {
+//        return this.serviceDiscovery;
+//    }
+//
+//    public Class<?> getObjectType() {
+//        return ServiceDiscovery.class;
+//    }
+//
+//    public boolean isSingleton() {
+//        return true;
+//    }
+//
+//    public void afterPropertiesSet() throws Exception {
+//        this.init();
+//        this.start();
+//    }
+//
+//
+//    public static void main(String[] args) throws Exception {
+//
+//        // no use, just to demonstrate usage for non-spring cases
+//        String connectString = "";
+//        String basePath = "";
+//        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
+//        registry.init();
+//        registry.start();
+//        registry.registerService(null);
+//    }
 }

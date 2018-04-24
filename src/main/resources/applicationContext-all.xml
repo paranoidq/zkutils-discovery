@@ -22,16 +22,26 @@
     <!--<import resource="classpath:config/applicationContext-tx.xml"/>-->
 
 
-    <!-- 定义ServiceRegistry为bean -->
-    <bean class="me.zkutils.loadbalance.provider.registry.ServiceRegistry" lazy-init="true">
-        <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
-        <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
-    </bean>
+    <!--&lt;!&ndash; 定义ServiceRegistry为bean &ndash;&gt;-->
+    <!--<bean class="me.zkutils.loadbalance.provider.registry.ServiceRegistry" lazy-init="true">-->
+        <!--<constructor-arg name="basePath" value="/loadbalance"></constructor-arg>-->
+        <!--<constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>-->
+    <!--</bean>-->
 
-    <bean class="me.zkutils.loadbalance.consumer.discovery.ServiceQuery" lazy-init="true">
-        <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
-        <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
-    </bean>
+    <!--<bean class="me.zkutils.loadbalance.consumer.discovery.ServiceQuery" lazy-init="true">-->
+        <!--<constructor-arg name="basePath" value="/loadbalance"></constructor-arg>-->
+        <!--<constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>-->
+    <!--</bean>-->
+
+
+    <!--&lt;!&ndash; dnsquery &ndash;&gt;-->
+    <!--<bean class="me.zkutils.loadbalance.consumer.discovery.ServiceQuery" id="dnsQuery">-->
+        <!--<constructor-arg name="basePath" value="/dns"></constructor-arg>-->
+        <!--<constructor-arg name="connectString" value="localhost"></constructor-arg>-->
+    <!--</bean>-->
+    <!--<bean class="me.zkutils.loadbalance.recipes.dns.DnsQuery" lazy-init="true">-->
+        <!--<constructor-arg ref="dnsQuery"/>-->
+    <!--</bean>-->
 
 
 

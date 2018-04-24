@@ -17,10 +17,15 @@ public class SampleServer {
 
     private static Logger logger = LoggerFactory.getLogger(SampleServer.class);
 
+    private static String connectString = "localhost";
+    private static String basePath = "/loadbalance";
+
 
     public static void main(String[] args) throws Exception {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
-        ServiceRegistry registry = context.getBean(ServiceRegistry.class);
+//        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext-all.xml");
+//        ServiceRegistry registry = context.getBean(ServiceRegistry.class);
+
+        ServiceRegistry registry = new ServiceRegistry(connectString, basePath);
 
         registry.registerService(ServiceInstance.<ServicePayLoad>builder()
             .name("demo-service")
