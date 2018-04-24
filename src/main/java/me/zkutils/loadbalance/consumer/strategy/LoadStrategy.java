@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.client.strategy;
+package me.zkutils.loadbalance.consumer.strategy;
 
 import org.apache.curator.x.discovery.ProviderStrategy;
 import org.apache.curator.x.discovery.ServiceInstance;

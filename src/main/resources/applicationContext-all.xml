@@ -23,13 +23,16 @@
 
 
     <!-- 定义ServiceRegistry为bean -->
-    <bean class="me.zkutils.loadbalance.server.registry.ServiceRegistry" lazy-init="true">
+    <bean class="me.zkutils.loadbalance.provider.registry.ServiceRegistry" lazy-init="true">
         <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
         <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
     </bean>
 
-    <bean class="me.zkutils.loadbalance.client.discovery.ServiceQuery" lazy-init="true">
+    <bean class="me.zkutils.loadbalance.consumer.discovery.ServiceQuery" lazy-init="true">
         <constructor-arg name="basePath" value="/loadbalance"></constructor-arg>
         <constructor-arg name="connectString" value="localhost" type="java.lang.String"></constructor-arg>
     </bean>
+
+
+
 </beans>

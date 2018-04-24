@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.server.registry;
+package me.zkutils.loadbalance.provider.registry;
 
 import me.zkutils.loadbalance.ServicePayLoad;
 import org.apache.curator.framework.CuratorFramework;

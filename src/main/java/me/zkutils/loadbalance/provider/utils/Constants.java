@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.server.utils;
+package me.zkutils.loadbalance.provider.utils;
 
 /**
  * @author paranoidq

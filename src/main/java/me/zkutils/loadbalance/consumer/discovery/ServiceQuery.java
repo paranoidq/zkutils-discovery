@@ -1,4 +1,4 @@
-package me.zkutils.loadbalance.client.discovery;
+package me.zkutils.loadbalance.consumer.discovery;
 
 
 import me.zkutils.loadbalance.ServicePayLoad;
